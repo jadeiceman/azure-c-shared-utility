@@ -10,13 +10,15 @@
 
 #ifdef __cplusplus
 extern "C" {
+#include <cstdint>
+#else
+#include <stdint.h>
 #endif /* __cplusplus */
 
     MOCKABLE_FUNCTION(, int, platform_init);
     MOCKABLE_FUNCTION(, void, platform_deinit);
     MOCKABLE_FUNCTION(, const IO_INTERFACE_DESCRIPTION*, platform_get_default_tlsio);
-    MOCKABLE_FUNCTION(, STRING_HANDLE, platform_get_platform_info);
-    MOCKABLE_FUNCTION(, STRING_HANDLE, platform_get_additional_info, uint32_t, options);
+    MOCKABLE_FUNCTION(, STRING_HANDLE, platform_get_platform_info, uint32_t, options);
 
 #ifdef __cplusplus
 }

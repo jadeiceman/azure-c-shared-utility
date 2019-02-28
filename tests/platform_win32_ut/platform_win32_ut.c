@@ -55,6 +55,7 @@ MOCK_FUNCTION_END(0)
 MOCK_FUNCTION_WITH_CODE(WSAAPI, int, WSACleanup)
 MOCK_FUNCTION_END(0)
 
+
 static const IO_INTERFACE_DESCRIPTION* TEST_IO_INTERFACE_DESCRIPTION = (const IO_INTERFACE_DESCRIPTION*)0x4444;
 
 #ifdef __cplusplus
@@ -72,6 +73,26 @@ extern "C"
         (void)memcpy(temp, psz, strlen(psz) + 1);
         return (STRING_HANDLE)temp;
     }
+
+    int STRING_sprintf(STRING_HANDLE handle, const char* format, ...);
+
+    int STRING_sprintf(STRING_HANDLE handle, const char* format, ...)
+    {
+        (void)handle;
+        (void)format;
+        return 0;
+    }
+
+    /*MOCKABLE_FUNCTION(WINADVAPI, LSTATUS
+        APIENTRY
+        RegOpenKeyExA(
+            _In_ HKEY hKey,
+            _In_opt_ LPCSTR lpSubKey,
+            _In_opt_ DWORD ulOptions,
+            _In_ REGSAM samDesired,
+            _Out_ PHKEY phkResult
+        );*/
+
 #ifdef __cplusplus
 }
 #endif
@@ -233,22 +254,7 @@ TEST_FUNCTION(platform_get_platform_info_success)
     //arrange
 
     //act
-    STRING_HANDLE platform = platform_get_platform_info();
-
-    //assert
-    ASSERT_IS_NOT_NULL(platform);
-    ASSERT_ARE_EQUAL(char_ptr, umock_c_get_expected_calls(), umock_c_get_actual_calls());
-
-    // cleanup
-    STRING_delete(platform);
-}
-
-TEST_FUNCTION(platform_get_platform_info_with_id_success)
-{
-    //arrange
-
-    //act
-    STRING_HANDLE platform = platform_get_platform_info_with_id();
+    STRING_HANDLE platform = platform_get_platform_info(1);
 
     //assert
     ASSERT_IS_NOT_NULL(platform);
