@@ -82,17 +82,6 @@ extern "C"
         (void)format;
         return 0;
     }
-
-    /*MOCKABLE_FUNCTION(WINADVAPI, LSTATUS
-        APIENTRY
-        RegOpenKeyExA(
-            _In_ HKEY hKey,
-            _In_opt_ LPCSTR lpSubKey,
-            _In_opt_ DWORD ulOptions,
-            _In_ REGSAM samDesired,
-            _Out_ PHKEY phkResult
-        );*/
-
 #ifdef __cplusplus
 }
 #endif
