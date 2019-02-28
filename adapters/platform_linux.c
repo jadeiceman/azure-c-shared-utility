@@ -17,6 +17,7 @@
 #include "azure_c_shared_utility/tlsio_mbedtls.h"
 #endif
 
+#include <stdint.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/utsname.h>
@@ -47,8 +48,10 @@ const IO_INTERFACE_DESCRIPTION* platform_get_default_tlsio(void)
 #endif
 }
 
-STRING_HANDLE platform_get_platform_info(void)
+STRING_HANDLE platform_get_platform_info(uint32_t options)
 {
+    (void)options;
+
     // Expected format: "(<runtime name>; <operating system name>; <platform>)"
 
     STRING_HANDLE result;

@@ -1,6 +1,8 @@
 // Copyright (C) Firmwave Ltd., All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+#include <stdint.h>
+
 #include "azure_c_shared_utility/platform.h"
 #include "azure_c_shared_utility/xio.h"
 #include "azure_c_shared_utility/tlsio_cyclonessl.h"
@@ -20,8 +22,10 @@ const IO_INTERFACE_DESCRIPTION* platform_get_default_tlsio(void)
     return tlsio_cyclonessl_get_interface_description();
 }
 
-STRING_HANDLE platform_get_platform_info(void)
+STRING_HANDLE platform_get_platform_info(uint32_t options)
 {
+    (void)options;
+
     // Expected format: "(<runtime name>; <operating system name>; <platform>)"
 
     return STRING_construct("(native; freertos; undefined)");

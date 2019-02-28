@@ -3,6 +3,7 @@
 
 // MBED seems to not implement size_t properly within their cstddef.h header, and builds will fail if stddef.h is not included by the projects.
 #include <stddef.h> 
+#include <stdint.h>
 #include "azure_c_shared_utility/platform.h"
 #include "EthernetInterface.h"
 #include "NTPClient.h"
@@ -64,8 +65,10 @@ const IO_INTERFACE_DESCRIPTION* platform_get_default_tlsio(void)
     return tlsio_wolfssl_get_interface_description();
 }
 
-STRING_HANDLE platform_get_platform_info(void)
+STRING_HANDLE platform_get_platform_info(uint32_t options)
 {
+    (void)options;
+
     // Expected format: "(<runtime name>; <operating system name>; <platform>)"
 
     return STRING_construct("(native; mbed; undefined)");
